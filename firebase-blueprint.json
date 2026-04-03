@@ -1,0 +1,96 @@
+{
+  "entities": {
+    "User": {
+      "title": "User",
+      "description": "A user of the app",
+      "type": "object",
+      "properties": {
+        "uid": { "type": "string" },
+        "email": { "type": "string", "format": "email" },
+        "displayName": { "type": "string" },
+        "photoURL": { "type": "string" },
+        "dob": { "type": "string" },
+        "partnerId": { "type": "string" },
+        "coupleId": { "type": "string" },
+        "theme": { "type": "string", "enum": ["dark", "light"] },
+        "language": { "type": "string", "enum": ["vi", "ja"] }
+      },
+      "required": ["uid", "email"]
+    },
+    "Couple": {
+      "title": "Couple",
+      "description": "A relationship between two users",
+      "type": "object",
+      "properties": {
+        "user1Id": { "type": "string" },
+        "user2Id": { "type": "string" },
+        "startDate": { "type": "string", "format": "date-time" }
+      },
+      "required": ["user1Id"]
+    },
+    "Memory": {
+      "title": "Memory",
+      "description": "A timeline memory/post",
+      "type": "object",
+      "properties": {
+        "coupleId": { "type": "string" },
+        "authorId": { "type": "string" },
+        "title": { "type": "string" },
+        "description": { "type": "string" },
+        "date": { "type": "string", "format": "date-time" },
+        "images": { "type": "array", "items": { "type": "string" } },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["coupleId", "authorId", "title", "date"]
+    },
+    "BucketListItem": {
+      "title": "Bucket List Item",
+      "description": "An item on the couple's bucket list",
+      "type": "object",
+      "properties": {
+        "coupleId": { "type": "string" },
+        "authorId": { "type": "string" },
+        "title": { "type": "string" },
+        "status": { "type": "string", "enum": ["muon", "se", "da_lam"] },
+        "images": { "type": "array", "items": { "type": "string" } },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["coupleId", "authorId", "title", "status"]
+    },
+    "Mood": {
+      "title": "Mood",
+      "description": "Daily mood entry",
+      "type": "object",
+      "properties": {
+        "coupleId": { "type": "string" },
+        "userId": { "type": "string" },
+        "date": { "type": "string" },
+        "mood": { "type": "string" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["coupleId", "userId", "date", "mood"]
+    }
+  },
+  "firestore": {
+    "/users/{userId}": {
+      "schema": { "$ref": "#/entities/User" },
+      "description": "User profiles"
+    },
+    "/couples/{coupleId}": {
+      "schema": { "$ref": "#/entities/Couple" },
+      "description": "Couple relationships"
+    },
+    "/memories/{memoryId}": {
+      "schema": { "$ref": "#/entities/Memory" },
+      "description": "Timeline memories"
+    },
+    "/bucketList/{itemId}": {
+      "schema": { "$ref": "#/entities/BucketListItem" },
+      "description": "Bucket list items"
+    },
+    "/moods/{moodId}": {
+      "schema": { "$ref": "#/entities/Mood" },
+      "description": "Daily moods"
+    }
+  }
+}

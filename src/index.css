@@ -1,0 +1,49 @@
+@import "tailwindcss";
+
+@theme {
+  --color-primary: #ec4899; /* pink-500 */
+  --color-primary-light: #fbcfe8; /* pink-200 */
+  --color-primary-dark: #be185d; /* pink-700 */
+  --color-bg-dark: #0f172a; /* slate-900 */
+  --color-bg-light: #fdf2f8; /* pink-50 */
+  --color-surface-dark: #1e293b; /* slate-800 */
+  --color-surface-light: #ffffff;
+  --color-text-dark: #f8fafc; /* slate-50 */
+  --color-text-light: #334155; /* slate-700 */
+  --color-text-muted-dark: #94a3b8; /* slate-400 */
+  --color-text-muted-light: #94a3b8; /* slate-400 */
+}
+
+@layer base {
+  :root {
+    --bg: var(--color-bg-light);
+    --surface: var(--color-surface-light);
+    --text: var(--color-text-light);
+    --text-muted: var(--color-text-muted-light);
+    --primary: var(--color-primary);
+  }
+
+  .dark {
+    --bg: var(--color-bg-dark);
+    --surface: var(--color-surface-dark);
+    --text: var(--color-text-dark);
+    --text-muted: var(--color-text-muted-dark);
+  }
+
+  body {
+    background-color: var(--bg);
+    color: var(--text);
+    font-family: 'Inter', system-ui, sans-serif;
+    -webkit-tap-highlight-color: transparent;
+  }
+}
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+/* Hide scrollbar for IE, Edge and Firefox */
+.no-scrollbar {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
